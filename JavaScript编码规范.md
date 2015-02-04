@@ -1,6 +1,15 @@
 # JavaScript 编码规范
 
 
+[1. 代码格式](#user-content-1-代码格式)
+
+[2. 命名](#user-content-2-命名)
+
+[3. 注释](#user-content-3-注释)
+
+[4. 语言特性](#user-content-4-语言特性)
+
+
 ## 1. 代码格式
 
 ### 1.1 缩进
@@ -9,18 +18,18 @@
 
 ```javascript
 // 推荐的写法
-if (a && b) {	
-  for (i = 0, i < 10; i++) {	
-    alert(i);	
-  }	
+if (a && b) {
+  for (i = 0, i < 10; i++) {
+    alert(i);
+  }
 }
 
-// 不推荐的写法  
-if (a && b) {	
-    for (i = 0, i < 10; i++) {	
-         alert(i);	
-    }	
-}	
+// 不推荐的写法
+if (a && b) {
+  for (i = 0, i < 10; i++) {
+    alert(i);
+  }
+}
 ```
 
 
@@ -29,17 +38,17 @@ if (a && b) {
 - 二元运算符两侧必须有一个空格，一元运算符与操作对象之间不允许有空格
 - - 用作代码块起始的左花括号 `{` 前必须有一个空格
 - `if` / `else` / `for` / `while` / `function` / `switch` / `do` / `try` / `catch` / `finally` 关键字后，必须有一个空格
-- 函数声明、具名函数表达式、函数调用中，函数名和 ( 之间不允许有空格
+- 函数声明、函数表达式、函数调用中，函数名和 ( 之间不允许有空格
 
 ```javascript
 if (a + b === 0 && !c) {
   allowed();
 }
-``` 
+```
 
 - 在对象创建时，属性中的 `:` 之后必须有空格，`:` 之前不允许有空格
 - `,` 和 `;` 前不允许有空格
-- 多数情况下`()` 、`[]` 和 `{}` 内紧贴括号部分不允许有空格（换行不算空格）
+- 多数情况下 `()` 、`[]` 和 `{}` 内紧贴括号部分不允许有空格（换行不算空格）
 - 行尾不要有空格。
 
 ```javascript
@@ -47,8 +56,9 @@ var obj = {
   a: 1,
   b: 2
 };
+
 var obj2 = {c: 3};
-``` 
+```
 
 
 ### 1.3 行的长度与换行
@@ -58,21 +68,21 @@ var obj2 = {c: 3};
 - 每个独立语句结束后换行。
 
 ```javascript
-// 不好的写法
+// Bad
 callAFunction(document, element, window, "some string value", true, 123,
   navigator);
 
 callAFunction(document, element, window, "some string value", true, 123
     , navigator);
-    
-var html = "<pThe sum of " + a + " and " + b + " plus " + c
-    + " is " + (a + b + c);
 
-// 好的写法         
+var html = "<pThe sum of " + a + " and " + b + " plus " + c
+           + " is " + (a + b + c);
+
+// Good
 callAFunction(document, element, window, "some string value", true, 123,
     navigator);
-    
-var html = "<pThe sum of " + a + " and " + b + " plus " + c + 
+
+var html = "<pThe sum of " + a + " and " + b + " plus " + c +
            " is " + (a + b + c);
 ```
 
@@ -93,16 +103,23 @@ function total() {
 }
 
 function add() {
-}   
+}
 ```
 
 
 ### 1.5 语句
 
-- 不要省略语句结束的分号。
-- 在 `if` / `else` / `for` / `do` / `while` 语句中，即使只有一行，也不要省略 `{}`。
+- 不要省略语句结束的分号
+- 在 `if` / `else` / `for` / `do` / `while` 语句中，即使只有一行，也不要省略 `{}`，并且推荐使用 `{}` 也不要写为单行
 
 ```javascript
+// Bad
+function total() {
+  if (i < 10) hello();
+  else {hi()};
+}
+
+// Good
 function total() {
   if (i < 10) {
     hello();
@@ -110,8 +127,23 @@ function total() {
 }
 ```
 
+- 花括号的对齐采用末尾追加，不要换行
 
-## 2 命名
+```javascript
+// Bad
+function doSomething() 
+{
+  // do something
+}
+
+// Good
+function doSomething() {
+  // do something
+}
+```
+
+
+## 2. 命名
 
 - 变量名应当遵守 `Camel` 命名法，并且命名前缀应当是名词
 
@@ -193,10 +225,10 @@ if (condition) {
 if (condition) {
 
   /*
-   * 为了
-   * 给 a
-   * 赋值
-   */
+  * 为了
+  * 给 a
+  * 赋值
+  */
   var a = 10;
 }
 ```
@@ -209,10 +241,10 @@ if (condition) {
 
 ```javascript
 /**
- * 更新
- * @param params
- * @param callback
- */
+* 更新
+* @param params
+* @param callback
+*/
 ```
 
 - 可以通过文档注释生成文档，如果你要这么做，请对 *所有方法*，*所有构造函数* 以及 *所有包含文档化方法的对象* 都添加文档注释
@@ -254,10 +286,10 @@ if (condition) {
 - 不要使用 `\` 连接字符串，而是使用 `+` 连接字符串。
 
 ```javascript
-// 不好的写法
+// Bad
 var str = "One page Application website designs for your \ inspiration";
 
-// 好的写法
+// Good
 var str = "One page Application website designs for your " + "inspiration";
 ```
 
@@ -267,13 +299,13 @@ var str = "One page Application website designs for your " + "inspiration";
 - 不建议使用八进制数
 
 ```javascript
-// 不好的写法
+// Bad
 var price = 10.;
 var price = .5;
 
 var octal = 010;
 
-// 好的写法
+// Good
 var price = 10.0;
 var price = 0.5;
 ```
@@ -282,29 +314,30 @@ var price = 0.5;
 
 - 不要用 null 检测是否传入了一个参数
 - 不要用 null 检测一个未初始化的变量
-- 可以用来初始化对象，和初始化的对象比较
+- 可以用来初始化未来可能被申明为对象的变量
+- 可以与一个可能是对象或者非对象的初始化变量比较
 - 当函数参数是对象时，可以用作参数传入
 - 当函数返回值是对象时，可以用作返回值返回
 
 #### 4.1.4 Undefined
 
- 尽量避免将变量赋值为 undefined，不论变量未定义还是变量值为 undefined，typeof 都会返回 undefined。
+尽量避免将变量赋值为 undefined，不论变量未定义还是变量值为 undefined，typeof 都会返回 undefined。
 
 
 ### 4.2 引用类型
- 
+
 #### 4.2.1 对象[Object]
- 
+
 - 使用对象字面量创建对象，避免使用显示创建对象
 - 对象创建时，属性名是否用引号包裹都可以，但务必统一
 
 ```javascript
- // 不好的写法
+// Bad
 var book = new Object();
 book.title = "JavaScript";
 book.author = "dreamarts";
 
-// 好的写法
+// Good
 var book = {
   title: "JavaScript",
   author: "dreamarts"
@@ -324,22 +357,22 @@ String.prototype.trim = function () {
 
 #### 4.2.2 数组[Array]
 
-- 如果不是创建固定长度的数组，则使用数组字面量创建数组 
+- 如果不是创建固定长度的数组，则使用数组字面量创建数组
 - 遍历数组不要使用 `for..in`，可以使用 `for` 或者 `forEach`
 
 ```javascript
-// 不好的写法
+// Bad
 var colors = new Array("red", "green", "blue");
 
 for (c in colors) {
-    console.log(c);
+  console.log(c);
 }
 
-// 好的写法
+// Good
 var colors = ["red", "green", "blue"];
 
 for (var i = 0, len = colors.length; i < len; i++) {
-    console.log(c);
+  console.log(c);
 }
 ```
 
@@ -350,19 +383,97 @@ for (var i = 0, len = colors.length; i < len; i++) {
 - 由于变量声明提前，建议即用即声明，降低维护代价
 
 ```javascript
-// 不好的写法
-name = "a"; 
+// Bad
+name = "a";
 
 // 都可以
 var name = "a";
 var age = 20;
 
 var name = "a",
-    age = 20;
+age = 20;
 ```
 
 ### 4.4 函数
 
+- 不要在声明前调用函数，尽管存在函数声明提升（使用函数表达式没有函数声明提升）
+
+```javascript
+// Bad
+doSomething(item);
+
+function doSomething(item) {
+  // do something
+}
+
+// Good
+function doSomething(item) {
+  // do something
+}
+
+doSomething(item);
+```
+
+- 不要把函数声明写在语句块之内；但如果使用函数表达式，这是安全的
+
+```javascript
+// 不要这样写
+if (condition) {
+  function doSomethin() {
+    console.log("yes");
+  }
+} else {
+  function doSomethin() {
+    console.log("no");
+  }
+}
+```
+
+- 立即执行函数务必使用 `()` 括起来
+- 函数声明、函数表达式、函数调用中，函数名和 ( 之间不允许有空格
+
+```javascript
+// Good
+var value = (function() {
+
+// function body
+  return {
+    message: "Hi"
+  }
+}());
+```
+
+- 不推荐全局使用 `"use strict"`，除非所有文件都运行在严格模式下；可用立即执行函数包含代码段，将 `"use strict"` 置于函数第一行
+
+```javascript
+// 使用立即执行函数
+(function() {
+    "use strict";
+
+    function doSomething() {
+        // code
+    }
+
+    function doSomethingElse() {
+        // code
+    }
+
+})();
+```
+
 
 ### 4.5 运算符
+
+- 不要使用 `==` 和 `!=`，而是使用 `===` 和 `!==`
+- 二元运算符两侧必须有一个空格，一元运算符与操作对象之间不允许有空格
+
+### 4.6 语句
+
+#### 4.6.1 条件语句
+
+#### 4.6.2 循环语句
+
+#### 4.6.3 switch 语句
+
+
 
