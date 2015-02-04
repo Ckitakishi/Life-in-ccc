@@ -28,20 +28,20 @@
 [4. 语言特性](#user-content-4-语言特性)
 
 　　[4.1 基础数据类型](#user-content-41-基础数据类型)
-　　
-　　　　[4.1.1 字符串\[String\]](#user-content-411-字符串String)
 
-　　　　[4.1.2 数\[Number\]](#user-content-412-数Number)
+　　　　[4.1.1 字符串\[String\]](#user-content-411-字符串string)
 
-　　　　[4.1.3 Null](#user-content-413-Null)
+　　　　[4.1.2 数\[Number\]](#user-content-412-数number)
 
-　　　　[4.1.4 Undefined](#user-content-414-Undefined)
+　　　　[4.1.3 Null](#user-content-413-null)
+
+　　　　[4.1.4 Undefined](#user-content-414-undefined)
 
 　　[4.2 引用类型](#user-content-42-引用类型)
 
-　　　　[4.2.1 对象\[Object\]](#user-content-421-对象Object)
+　　　　[4.2.1 对象\[Object\]](#user-content-421-对象object)
 
-　　　　[4.2.2 数组\[Array\]](#user-content-422-数组Array)
+　　　　[4.2.2 数组\[Array\]](#user-content-422-数组array)
 
 　　[4.3 变量](#user-content-43-变量)
 
