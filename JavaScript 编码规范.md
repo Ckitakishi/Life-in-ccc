@@ -17,7 +17,47 @@
 
 [3. 注释](#user-content-3-注释)
 
+　　[3.1 单行注释](#user-content-31-单行注释)
+
+　　[3.2 多行注释](#user-content-31-多行注释)
+
+　　[3.3 文档注释](#user-content-33-文档注释)
+
+　　[3.4 特殊注释](#user-content-34-特殊注释)
+
 [4. 语言特性](#user-content-4-语言特性)
+
+　　[4.1 基础数据类型](#user-content-41-基础数据类型)
+　　
+　　　　[4.1.1 字符串\[String\]](#user-content-411-字符串String)
+　　
+　　　　[4.1.2 数\[Number\]](#user-content-412-数Number)
+　　
+　　　　[4.1.3 Null](#user-content-413-Null)
+　　
+　　　　[4.1.4 Undefined](#user-content-414-Undefined)
+
+　　[4.2 引用类型](#user-content-42-引用类型)
+　　
+　　　　[4.2.1 对象\[Object\]](#user-content-421-对象Object)
+　　
+　　　　[4.2.2 数组\[Array\]](#user-content-422-数组Array)
+
+　　[4.3 变量](#user-content-43-变量)
+
+　　[4.4 函数](#user-content-44-函数)
+
+　　[4.5 运算符](#user-content-45-运算符)
+
+　　[4.6 语句](#user-content-46-语句)
+　　
+　　　　[4.6.1 条件语句](#user-content-461-条件语句)
+　　
+　　　　[4.6.2 循环语句](#user-content-462-循环语句)
+　　
+　　　　[4.6.3 with 语句](#user-content-463-with-语句)
+
+　　[4.7 动态特性](#user-content-47-动态特性)
 
 
 ## 1. 代码格式
@@ -27,19 +67,20 @@
 使用 2 个空格做为一个缩进层级，不允许使用 4 个空格 或 tab 字符。
 
 ```javascript
-// 推荐的写法
+// Bad
 if (a && b) {
   for (i = 0, i < 10; i++) {
     alert(i);
   }
 }
 
-// 不推荐的写法
+// Good
 if (a && b) {
   for (i = 0, i < 10; i++) {
     alert(i);
   }
 }
+
 ```
 
 
@@ -51,6 +92,12 @@ if (a && b) {
 - 函数声明、函数表达式、函数调用中，函数名和 ( 之间不允许有空格
 
 ```javascript
+// Bad
+if(a+b === 0 && !c){
+  allowed ();
+}
+
+// Good
 if (a + b === 0 && !c) {
   allowed();
 }
@@ -62,6 +109,15 @@ if (a + b === 0 && !c) {
 - 行尾不要有空格。
 
 ```javascript
+// Bad
+var obj = {
+  a:1 ,
+  b : 2
+};
+
+var obj2 = { c: 3 };
+
+// Good
 var obj = {
   a: 1,
   b: 2
@@ -74,7 +130,7 @@ var obj2 = {c: 3};
 ### 1.3 行的长度与换行
 
 - 每行不得超过 `120` 个字符(正则表达式例外)，超过务必换行。
-- 通常在运算符后面换行，下一行增加两个层级（该规范指4个空格）的缩进；例外的是，给变量赋值的时候，第二行位置应当和赋值运算符位置保持对齐。
+- 通常在运算符后面换行，下一行增加两个层级（该规范指 `4` 个空格）的缩进；例外的是，给变量赋值的时候，第二行位置应当和赋值运算符位置保持对齐。
 - 每个独立语句结束后换行。
 
 ```javascript
@@ -105,11 +161,28 @@ var html = "<pThe sum of " + a + " and " + b + " plus " + c +
 - 在函数内逻辑上独立的代码片段之间使用空行分隔
 
 ```javascript
+// Bad
+function total() {
+  var i = 100;
+  if (i < 10) {
+    
+  } 
+  // description
+  return false;
+}
+function add() {
+}
+
+// Good
 function total() {
   var i = 100;
 
+  // description
   if (i < 10) {
   }
+  
+  // description
+   return false;
 }
 
 function add() {
@@ -158,6 +231,7 @@ function doSomething() {
 - 变量名应当遵守 `Camel` 命名法，并且命名前缀应当是名词
 
 ```javascript
+// Good
 var count = 10;
 var myName = "c";
 ```
@@ -165,8 +239,9 @@ var myName = "c";
 - 函数命名应当遵守 `Camel` 命名法，命名前缀应当是动词
 
 ```javascript
-var count = 10;
-var myName = "c";
+// Good
+function hasText() {}
+function total() {}
 ```
 
 下面是函数命名中一些常见的动词约定：
@@ -182,6 +257,7 @@ var myName = "c";
 - 常量名使用大写字母和下划线命名
 
 ```javascript
+// Good
 var MAX_COUNT = 10;
 var URL = "http://";
 ```
@@ -190,6 +266,7 @@ var URL = "http://";
 - 构造函数的方法和属性使用 `Camel` 命名法
 
 ```javascript
+// Good
 function TextNode(value, engine) {
   this.value = value;
   this.engine = engine;
@@ -203,14 +280,17 @@ TextNode.prototype.getClone = function () {
 - 由多个单词组成的缩写词，在命名中，根据当前命名法和出现的位置，所有字母的大小写与首字母的大小写保持一致。
 
 ```javascript
+// Good
 function insertHTML(element, html) {
 }
 
 var httpRequest = new HTTPRequest();
+var URL = "http://...";
 ```
 
 
 ## 3. 注释
+
 
 ### 3.1 单行注释
 
@@ -219,6 +299,7 @@ var httpRequest = new HTTPRequest();
 - 注释行数多不推荐使用单行注释
 
 ```javascript
+// Good
 if (condition) {
 
   // 为 a 赋值
@@ -227,11 +308,13 @@ if (condition) {
 }
 ```
 
+
 ### 3.2 多行注释
 
 - 注释行数过少（小于 3）的时候不推荐使用 `/*...*/` 这样的多行注释，缩进层级与下一行被注释说明的代码一致。`*` 和文本之间要有一个空格
 
 ```javascript
+// Good
 if (condition) {
 
   /*
@@ -243,6 +326,7 @@ if (condition) {
 }
 ```
 
+
 ### 3.3 文档注释
 
 - 文档注释包含在 `/**...*/` 形式的注释块中。
@@ -250,6 +334,7 @@ if (condition) {
 - 建议使用文档注释说明 *是什么*，而非 *怎么做*。
 
 ```javascript
+// Good
 /**
 * 更新
 * @param params
@@ -285,6 +370,7 @@ if (condition) {
 |type | 声明变量类型或者函数返回值类型 |
 |version | 版本号 |
 
+
 ### 3.4 特殊注释
 
 有时用一些特殊标记进行说明，请使用单行注释的格式
@@ -299,7 +385,9 @@ if (condition) {
 
 ## 4. 语言特性
 
+
 ### 4.1 基础数据类型
+
 
 #### 4.1.1 字符串[String]
 
@@ -345,6 +433,7 @@ var price = 0.5;
 尽量避免将变量赋值为 undefined，不论变量未定义还是变量值为 undefined，typeof 都会返回 undefined。
 
 
+
 ### 4.2 引用类型
 
 #### 4.2.1 对象[Object]
@@ -368,7 +457,7 @@ var book = {
 - 不允许修改和扩展任何原生对象和宿主对象的原型
 
 ```javascript
-// 不可以
+// Bad
 String.prototype.trim = function () {
 };
 ```
@@ -397,23 +486,27 @@ for (var i = 0, len = colors.length; i < len; i++) {
 }
 ```
 
+
 ### 4.3 变量
 
 - 变量在使用前必须通过 `var` 定义，否则变量将默认为全局变量
 - 可以多个变量共用一个 `var`，注意缩进
 - 由于变量声明提前，建议即用即声明，降低维护代价
+- 不要随意使用全局变量，除非是团队内约定的
 
 ```javascript
 // Bad
 name = "a";
 
-// 都可以
+// Good
 var name = "a";
 var age = 20;
 
+// Good
 var name = "a",
-age = 20;
+    age = 20;
 ```
+
 
 ### 4.4 函数
 
@@ -438,7 +531,7 @@ doSomething(item);
 - 不要把函数声明写在语句块之内；但如果使用函数表达式，这是安全的
 
 ```javascript
-// 不要这样写
+// Bad
 if (condition) {
   function doSomethin() {
     console.log("yes");
@@ -487,6 +580,7 @@ var value = (function() {
 
 - 不要使用 `==` 和 `!=`，而是使用 `===` 和 `!==`
 - 二元运算符两侧必须有一个空格，一元运算符与操作对象之间不允许有空格
+
 
 ### 4.6 语句
 
@@ -562,6 +656,7 @@ for (var i = 0, len = elements.length; i < len; i++) {
 #### 4.6.3 with 语句
 
 通常情况下都不要使用 `with` 语句。 
+
 
 ### 4.7 动态特性
 
