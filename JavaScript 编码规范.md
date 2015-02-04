@@ -30,17 +30,17 @@
 　　[4.1 基础数据类型](#user-content-41-基础数据类型)
 　　
 　　　　[4.1.1 字符串\[String\]](#user-content-411-字符串String)
-　　
+
 　　　　[4.1.2 数\[Number\]](#user-content-412-数Number)
-　　
+
 　　　　[4.1.3 Null](#user-content-413-Null)
-　　
+
 　　　　[4.1.4 Undefined](#user-content-414-Undefined)
 
 　　[4.2 引用类型](#user-content-42-引用类型)
-　　
+
 　　　　[4.2.1 对象\[Object\]](#user-content-421-对象Object)
-　　
+
 　　　　[4.2.2 数组\[Array\]](#user-content-422-数组Array)
 
 　　[4.3 变量](#user-content-43-变量)
@@ -50,11 +50,11 @@
 　　[4.5 运算符](#user-content-45-运算符)
 
 　　[4.6 语句](#user-content-46-语句)
-　　
+
 　　　　[4.6.1 条件语句](#user-content-461-条件语句)
-　　
+
 　　　　[4.6.2 循环语句](#user-content-462-循环语句)
-　　
+
 　　　　[4.6.3 with 语句](#user-content-463-with-语句)
 
 　　[4.7 动态特性](#user-content-47-动态特性)
