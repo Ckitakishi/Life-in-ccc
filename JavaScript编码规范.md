@@ -3,6 +3,16 @@
 
 [1. 代码格式](#user-content-1-代码格式)
 
+　　[1.1 缩进](#user-content-11-缩进)
+
+　　[1.2 空格](#user-content-12-空格)
+
+　　[1.3 行的长度与换行](#user-content-13-行的长度与换行)
+
+　　[1.4 空行](#user-content-14-空行)
+
+　　[1.5 语句](#user-content-15-语句)
+
 [2. 命名](#user-content-2-命名)
 
 [3. 注释](#user-content-3-注释)
@@ -275,8 +285,19 @@ if (condition) {
 |type | 声明变量类型或者函数返回值类型 |
 |version | 版本号 |
 
+### 3.4 特殊注释
 
-## 4. 语言特征
+有时用一些特殊标记进行说明，请使用单行注释的格式
+
+| 关键字 | 作用 |
+| ------ | ---- |
+| TODO | 有功能待实现。此时需要对将要实现的功能进行简单说明 |
+| FIXME | 该处代码运行没问题，但可能由于时间赶或者其他原因，需要修正。此时需要对如何修正进行简单说明 |
+| HACK | 为修正某些问题而写的不太好或者使用了某些诡异手段的代码。此时需要对思路或诡异手段进行描述 |
+| XXX | 该处存在陷阱。此时需要对陷阱进行描述 |
+
+
+## 4. 语言特性
 
 ### 4.1 基础数据类型
 
@@ -471,9 +492,79 @@ var value = (function() {
 
 #### 4.6.1 条件语句
 
+- `if` / `else` / `switch` 关键字后，必须有一个空格 [可以参看1.2 空格]
+- `switch` 下面的 `case` 务必缩进，结束一个分支一定要写 `break`
+- `case` 的排列顺序最好是执行频率顺序
+- `default` 语句省略的情况下，尽可能写明白注释
+
+```javascript
+switch (condition) {
+
+  // fall through
+  case "first":
+  case "second":
+    // code
+    break;
+
+  case "third":
+    // code
+
+  /* falls through */  // 添加该行注释可以让JSLint不对连续执行发出警告
+  default:
+    // code
+}
+h
+```
+
 #### 4.6.2 循环语句
 
-#### 4.6.3 switch 语句
+- `for`/`while`/`do` 关键字后，必须有一个空格 [可以参看1.2 空格]，`do..while` 中，`while` 前要有一个空格
+- `for..in` 用于遍历对象属性,使用时要使用 `hasOwnProperty` 过滤掉原型中的属性，除非对原型链遍历
+- `for..in` 不要用于遍历数组
+- `break`、`continue` 和 `label` 合理使用，避免调试过于困难
 
+```javascript
+for (prop in object) {
 
+ // 注意这里一定要有 hasOwnProperty 的判断， 否则 JSLint 或者 JSHint 都会有一个 warn ！
+ if (object.hasOwnProperty(prop)) {
+    console.log("Property name is " + prop);
+    console.log("Property value is " + object[prop]);
+  }
+}
+```
 
+- 对循环内多次使用的不变值，推荐在循环外用变量缓存
+- 不要在循环体内写函数表达式，最好提到循环外
+
+```javascript
+// bad
+for (var i = 0, len = elements.length; i < len; i++) {
+  var element = elements[i];
+  element.style.width = wrap.offsetWidth + 'px';
+  addListener(element, 'click', function () {});
+}
+
+// good
+var width = wrap.offsetWidth + 'px';
+
+function clicker() {
+  // ......
+}
+
+for (var i = 0, len = elements.length; i < len; i++) {
+  var element = elements[i];
+  element.style.width = width;
+  addListener(element, 'click', clicker);
+}
+```
+
+#### 4.6.3 with 语句
+
+通常情况下都不要使用 `with` 语句。 
+
+### 4.7 动态特性
+
+- 尽量避免使用 `eval()` 函数
+- 尽量避免通过 `new Function()` 执行动态代码 
+- 使用 `setTimeout()` 和 `setInterval()` 不要用字符串形式，而是使用函数 
